@@ -16,6 +16,7 @@ const productyQtn = document.querySelector('quantity');
 
 
 let cart = [];
+let totalAmount = 0;
 
 class Products {
 
@@ -73,13 +74,13 @@ class UI {
                     i.disabled = true;
 
                     //adding that item into cart
-                    let cartItem = {...Storage.getProducts(id),amount:1};
-                    cart = [...cart,cartItem];
+                    let cartItem = { ...Storage.getProducts(id), amount: 1 };
+                    cart = [...cart, cartItem];
                     Storage.saveCart(cart);
                     this.setCartValues(cart);
                     this.addCartItem(cartItem);
                     this.showCart();
-                    
+
                 });
             }
         });
@@ -87,28 +88,29 @@ class UI {
     populateCart(cart) {
         cart.forEach(item => this.addCartItem(item));
     }
-    setCartValues(cart){
-        let totalAmount=0;
-        let numberOfProducts=0;
+    setCartValues(cart) {
+        totalAmount = 0;
+        let numberOfProducts = 0;
         cart.forEach(item => {
             totalAmount += parseInt(item.price) * item.amount;
             numberOfProducts += item.amount;
         });
+
         cartTotal.innerHTML = totalAmount;
         cartQtn.innerHTML = '[' + numberOfProducts + ']';
         cartQtn.style.color = 'black';
 
     }
-    addCartItem(cartItem){
-    const div = document.createElement("div");
-    div.classList.add("cart-item");
-    div.innerHTML = `
+    addCartItem(cartItem) {
+        const div = document.createElement("div");
+        div.classList.add("cart-item");
+        div.innerHTML = `
                 <img
                 src=${cartItem.image}></img>
             <div>
                 <h5>${cartItem.name}</h5>
                 <h6>$${cartItem.price}</h6>
-                <span class="remove">REMOVE</span>
+                <span class="remove" data-id=${cartItem.id}>REMOVE</span>
             </div>
             <div class="qtn-btn">
                 <button class="minusQuantityButton" data-id=${cartItem.id}>-</button>
@@ -116,11 +118,11 @@ class UI {
                 <button class="addQuantityButton" data-id=${cartItem.id}>+</button>
             </div>
                 `;
-                cartContent.appendChild(div);
+        cartContent.appendChild(div);
     }
 
 
-    handlingCart(){
+    handlingCart() {
         cartClearBtn.addEventListener('click', () => {
             cart = [];
             this.setCartValues(cart);
@@ -133,30 +135,29 @@ class UI {
             });
             while (cartContent.children.length > 0) {
                 cartContent.removeChild(cartContent.children[0]);
-              }
-              this.closeCart();
+            }
+            this.closeCart();
         });
 
-        cartContent.addEventListener('click', (e)=>{
-            if(e.target.classList.contains('remove')){
+        cartContent.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove')) {
                 let removeItem = cart.find(item => item.id == e.target.dataset.id);
                 let id = e.target.dataset.id;
-                cart = cart.filter(item => item.id !== id);
-                console.log(cart);
+                cart = cart.filter(item => item.id != id);
                 this.setCartValues(cart);
                 Storage.saveCart(cart);
                 cartContent.removeChild(e.target.parentElement.parentElement);
                 const addButton = [...document.querySelectorAll('.add-btn')];
                 addButton.forEach(i => {
-                    if(i.dataset.id == id){
-                    i.disabled = false;
-                    i.innerHTML = 'ADD';
-                    i.style.background = '#4CAF50';
+                    if (i.dataset.id == id) {
+                        i.disabled = false;
+                        i.innerHTML = 'ADD';
+                        i.style.background = '#4CAF50';
                     }
                 });
-                
+
             }
-            if(e.target.classList.contains('addQuantityButton')){
+            if (e.target.classList.contains('addQuantityButton')) {
                 let item = cart.find(item => item.id == e.target.dataset.id);
                 item.amount += 1;
                 totalAmount += parseInt(item.price);
@@ -164,16 +165,29 @@ class UI {
                 e.target.previousElementSibling.innerHTML = item.amount;
                 Storage.saveCart(cart);
             }
-            if(e.target.classList.contains('minusQuantityButton')){
+            if (e.target.classList.contains('minusQuantityButton')) {
                 let item = cart.find(item => item.id == e.target.dataset.id);
                 item.amount -= 1;
                 totalAmount -= parseInt(item.price);
                 this.setCartValues(cart);
                 e.target.nextElementSibling.innerHTML = item.amount;
-                console.log(e.target.parentElement.parentElement);
-                // if(item.amount==0){
-                //     this.removeElementFromCart(e.target.dataset.id);
-                // }
+                if (item.amount == 0) {
+                let removeItem = cart.find(item => item.id == e.target.dataset.id);
+                let id = e.target.dataset.id;
+                cart = cart.filter(item => item.id != id);
+                this.setCartValues(cart);
+                Storage.saveCart(cart);
+                cartContent.removeChild(e.target.parentElement.parentElement);
+                const addButton = [...document.querySelectorAll('.add-btn')];
+                addButton.forEach(i => {
+                    if (i.dataset.id == id) {
+                        i.disabled = false;
+                        i.innerHTML = 'ADD';
+                        i.style.background = '#4CAF50';
+                    }
+                });
+
+                }
                 Storage.saveCart(item);
             }
         });
@@ -181,14 +195,14 @@ class UI {
 
     setupAPP() {
         cart = Storage.getCart();
-        if(cart.length>0){
-        this.setCartValues(cart);
-        this.populateCart(cart);
+        if (cart.length > 0) {
+            this.setCartValues(cart);
+            this.populateCart(cart);
         }
         //opening and closing cart
         cartBtn.addEventListener("click", this.showCart);
         cartCloseBtn.addEventListener("click", this.closeCart);
-      }
+    }
     showCart() {
         cartOverlay.classList.add("transparentBcg");
         cartDom.classList.add("showCart");
@@ -197,13 +211,7 @@ class UI {
         cartOverlay.classList.remove("transparentBcg");
         cartDom.classList.remove("showCart");
     }
-    removeElementFromCart(removeItem){
-        cart = cart.filter(item => item.id != removeItem.id);
-        this.setCartValues(cart);
-        Storage.saveCart(cart);
-        // cartContent.removeChild(removeItem.parentElement);
-        console.log(removeItem);
-    }
+
 
 }
 
