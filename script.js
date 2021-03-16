@@ -262,9 +262,9 @@ document.addEventListener("DOMContentLoaded", () => {
         ui.handlingCart();
     });
 
+    //filtering products by category
     newArrivalParams.addEventListener('click',(e)=>{
         let products = Storage.getProductsByCategory(e.target.innerHTML);
-        console.log(products);
         ui.displayProducts(products);
     });
 
