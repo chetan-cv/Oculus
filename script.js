@@ -11,8 +11,7 @@ const qtnAdd = document.querySelector('.addQuantityButton');
 const cartBtn = document.querySelector('.cart-btn');
 const cartQtn = document.querySelector('.cart-qtn');
 const productsDom = document.querySelector('.product-items');
-const removeFromCart = document.querySelector('remove');
-const productyQtn = document.querySelector('quantity');
+const newArrivalParams = document.querySelector('.new-arrivals-params');
 
 
 let cart = [];
@@ -224,6 +223,21 @@ class Storage {
         let items = JSON.parse(localStorage.getItem('products'));
         return items.find(product => product.id == id);
     }
+    static getProductsByCategory(category){
+        let items = JSON.parse(localStorage.getItem('products'));
+        let result = [];
+        if(category === 'ALL'){
+            return items;
+        }
+        else{
+        for(let i=0;i<items.length;i++){
+            if(items[i].category.toLowerCase() == category.toLowerCase()){
+                result.push(items[i]);
+            }
+        }
+        return result;
+    }
+    }
     static saveCart(cart) {
         localStorage.setItem('cart', JSON.stringify(cart));
     }
@@ -246,6 +260,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }).then(() => {
         ui.addProductsButton();
         ui.handlingCart();
+    });
+
+    newArrivalParams.addEventListener('click',(e)=>{
+        let products = Storage.getProductsByCategory(e.target.innerHTML);
+        console.log(products);
+        ui.displayProducts(products);
     });
 
 

@@ -275,7 +275,7 @@ color:gray;
     position: absolute;
     top: 0;
     left: 0;
-    height: 99%;
+    height: 97%;
     width: 100%;
     background: rgba(0, 0, 0, 0.6);
     color: #ffffff;
@@ -328,6 +328,11 @@ color:gray;
     font-size: 10px;
     letter-spacing: var(--mainLetterSpacing);
     font-weight: 600;
+    cursor: pointer;
+}
+
+.new-arrivals-params > p:hover{
+    color: rgb(126, 126, 126);
 }
 
 /* end of new arrivals  */
