@@ -342,18 +342,18 @@ color:gray;
     max-width: 1170px;
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(260px,1fr));
-    grid-column-gap: 1.5rem;
-    grid-row-gap: 2rem;
+    grid-column-gap: 2.5rem;
+    grid-row-gap: 4rem;
 }
 .product-title{
-    font-size: 12px;
+    font-size: 14px;
     color: rgb(41, 40, 40);
     letter-spacing: var(--mainLetterSpacing);
     text-align: center;
     font-weight: 600; 
 }
 .product-subtitle{
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 1px;
     text-align: center;
     font-weight: 600; 
@@ -468,14 +468,15 @@ color:gray;
 
 
 /*
-cast iron - 76cm - low
-devils ivy - 200cm - low
+cast iron - 76cm - low ddd
+devils ivy - 200cm - low dd
 weeping fig tree - 150cm - low
 staghorn fern - 90cm - low
 
-jade plant - 150cm-bright
-croton - 90cm - bright
+jade plant - 150cm-bright dd
+croton - 90cm - bright dd
 
+Done
 aloevera 100cm - suc
 dolphin - 15cm - suc
 */

@@ -1,0 +1,67 @@
+[
+    
+    {
+        "id": 1,
+        "price": 14,
+        "name": "Cast Iron Plant",
+        "height": "76",
+        "category": "Low-Light",
+        "image": "./Images/cast_iron_plant.jpg"
+    },
+    {
+        "id": 2,
+        "price": 13,
+        "name": "Dolphin Plant",
+        "height": "15",
+        "category": "Succulents",
+        "image": "./Images/dolphin_plant.jpg"
+    },
+    {
+        "id": 3,
+        "price": 12,
+        "name": "Aloe Vera",
+        "height": "100",
+        "category": "Succulents",
+        "image": "./Images/aloe_vera.jpg"
+    },
+    {
+        "id": 4,
+        "price": 15,
+        "name": "Devil's Ivy",
+        "height": "200",
+        "category": "Low-Light",
+        "image": "./Images/devils_ivy.jpg"
+    },
+    {
+        "id": 5,
+        "price": 18,
+        "name": "Jade Plant",
+        "height": "150",
+        "category": "Bright-Light",
+        "image": "./Images/jade_plant.jpg"
+    },
+    {
+        "id": 6,
+        "price": 20,
+        "name": "Croton",
+        "height": "90",
+        "category": "Bright-Light",
+        "image": "./Images/croton.jpg"
+    },
+    {
+        "id": 7,
+        "price": 21,
+        "name": "Weeping Fig Tree",
+        "height": "150",
+        "category": "Low-Light",
+        "image": "./Images/weeping_fig_tree.jpg"
+    },
+    {
+        "id": 8,
+        "price": 20,
+        "name": "Staghorn Fern",
+        "height": "90",
+        "category": "Low-Light",
+        "image": "./Images/staghorn_fern.jpg"
+    }
+]

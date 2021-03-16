@@ -22,7 +22,9 @@ class Products {
 
     async getProducts() {
         try {
-            let res = await fetch('http://172.19.234.232:8000/products/');
+            // or when fetching from api 
+            // let res= await fetch('http://ip_address:port/endpoint/);
+            let res = await fetch('products.json');
             return res.json();
         }
         catch (error) {
@@ -63,16 +65,14 @@ class UI {
             const id = i.dataset.id;
             let inCart = cart.find(item => item.id == id);
             if (inCart) {
-                i.innerHTML = 'Remove';
-                i.style.background = 'red';
+                
+                i.innerHTML = 'ADDED';
                 i.disabled = true;
             }
             else {
                 i.addEventListener('click', e => {
-                    i.innerHTML = 'Remove';
-                    i.style.background = 'red';
+                    i.innerHTML = 'ADDED';
                     i.disabled = true;
-
                     //adding that item into cart
                     let cartItem = { ...Storage.getProducts(id), amount: 1 };
                     cart = [...cart, cartItem];
